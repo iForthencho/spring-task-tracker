@@ -3,6 +3,7 @@ package com.DATakeHomeAssignment.demo.service;
 
 import com.DATakeHomeAssignment.demo.dao.TaskRepository;
 import com.DATakeHomeAssignment.demo.entity.Task;
+import com.DATakeHomeAssignment.demo.exception.TaskNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task findById(long theId) {
+    public Task findById(long theId) throws TaskNotFoundException {
         Optional<Task> result = taskRepository.findById(theId);
 
         Task theTask = null;
@@ -35,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
         }
         else {
             // task was not found
-            throw new RuntimeException("Did not find task id - " + theId);
+            throw new TaskNotFoundException("Task id not found - " + theId);
         }
 
         return theTask;

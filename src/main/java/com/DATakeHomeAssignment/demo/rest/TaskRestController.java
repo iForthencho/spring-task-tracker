@@ -1,6 +1,7 @@
 package com.DATakeHomeAssignment.demo.rest;
 
 import com.DATakeHomeAssignment.demo.entity.Task;
+import com.DATakeHomeAssignment.demo.exception.TaskNotFoundException;
 import com.DATakeHomeAssignment.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,9 @@ public class TaskRestController {
 
     // add mapping for GET /tasks/{taskId}
     @GetMapping("/tasks/{taskId}")
-    public Task getTask(@PathVariable long taskId) {
+    public Task getTask(@PathVariable long taskId) throws TaskNotFoundException{
 
         Task theTask = taskService.findById(taskId);
-
-        if (theTask == null) {
-            throw new RuntimeException("Task id not found - " + taskId);
-        }
 
         return theTask;
     }
@@ -58,21 +55,18 @@ public class TaskRestController {
     @PutMapping("/tasks")
     public Task updateTask(@RequestBody Task theTask) {
 
-        Task dbTask = taskService.save(theTask);
+        Task tempTask = taskService.findById(theTask.getId());
+
+        Task dbTask = taskService.save(tempTask);
 
         return dbTask;
     }
 
     // add mapping for DELETE /tasks/{taskId} - delete task
     @DeleteMapping("/tasks/{taskId}")
-    public  String deleteTask(@PathVariable long taskId) {
+    public  String deleteTask(@PathVariable long taskId) throws TaskNotFoundException{
 
         Task tempTask = taskService.findById(taskId);
-
-        // throw exception if null
-        if (tempTask == null) {
-            throw new RuntimeException("Task id not found - " + taskId);
-        }
 
         taskService.deleteById(taskId);
 

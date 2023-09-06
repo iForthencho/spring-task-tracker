@@ -1,6 +1,5 @@
 package com.DATakeHomeAssignment.demo.security;
 
-import org.apache.catalina.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -33,6 +32,7 @@ public class DemoSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/tasks").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.PUT, "/api/tasks").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
         );
 
         // use HTTP basic authentication
