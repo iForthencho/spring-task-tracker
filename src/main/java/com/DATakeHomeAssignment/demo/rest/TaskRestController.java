@@ -53,7 +53,7 @@ public class TaskRestController {
 
     // add mapping for PUT /tasks - update existing task
     @PutMapping("/tasks")
-    public Task updateTask(@RequestBody Task theTask) {
+    public Task updateTask(@RequestBody Task theTask) throws TaskNotFoundException{
 
         Task tempTask = taskService.findById(theTask.getId());
 
