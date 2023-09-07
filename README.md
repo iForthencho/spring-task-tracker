@@ -1,7 +1,6 @@
 # spring-task-tracker
 
 Task tracking application to showcase a simple RESTful API using Java and Spring Boot.
-
 ### Features
 
 - CRUD operation for tasks
@@ -17,21 +16,26 @@ Task tracking application to showcase a simple RESTful API using Java and Spring
 ### Setting Up
 
 1. Clone the repository:
+<br><br>
     ```
-    https://github.com/iForthencho/spring-task-tracker.git
+    git clone https://github.com/iForthencho/spring-task-tracker.git
+    cd spring-task-tracker
     ```
 2. Setting up the MySQL database
    1. Create a new MySQL local instance and run the provided MySQL scripts found in the "MySQL-scripts" folder.
    2. Update 'src/main/resources/application.properties' with your MySQL credentials.
+<br><br>
    ```
     spring.datasource.username=
     spring.datasource.password=
    ```
 3. Build the application:
+<br><br>
     ```
-    mvnw package
+    ./mvnw package
     ```
 4. Run the application:
+<br><br>
     ```
     cd target/
     java -jar demo-0.0.1-SNAPSHOT.jar
@@ -46,4 +50,14 @@ Task tracking application to showcase a simple RESTful API using Java and Spring
 | POST | /api/tasks | Create a new task |
 | PUT | /api/tasks/{id} | Update a task by ID |
 | DELETE | /api/tasks/{id} | Delete a task by ID |
+
+### User Authorization
+* Please note that this is just to showcase spring security, hence usernames and passwords are added here.
+* BCrypt encryption is used in this demo.
+
+| Username | Password | Role | HTTP Method |
+| --- |---|---|-------------|
+| shawn | daintern | EMPLOYEE, MANAGER, ADMIN | All methods |
+| susan | daintern | EMPLOYEE, MANAGER | GET, POST, PUT |
+| john | daintern | EMPLOYEE | GET |
 
