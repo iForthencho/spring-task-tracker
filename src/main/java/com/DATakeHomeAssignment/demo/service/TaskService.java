@@ -15,4 +15,6 @@ public interface TaskService {
 
     void deleteById(long theId);
 
+    Task updateTask(Long id, Task theTask);
+
 }

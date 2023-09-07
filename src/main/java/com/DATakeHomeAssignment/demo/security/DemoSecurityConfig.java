@@ -30,7 +30,7 @@ public class DemoSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/tasks").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "/api/tasks").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "/api/tasks").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/api/tasks/**").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
         );
